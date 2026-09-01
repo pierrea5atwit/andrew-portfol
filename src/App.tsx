@@ -15,12 +15,12 @@ function ProjectCard({ p }: { p: Project }) {
       <div className="card__links">
         {p.repo && (
           <a href={p.repo} target="_blank" rel="noreferrer">
-            Code<span aria-hidden="true"> &#8599;</span>
+            Code
           </a>
         )}
         {p.live && (
           <a href={p.live} target="_blank" rel="noreferrer">
-            Live<span aria-hidden="true"> &#8599;</span>
+            Live
           </a>
         )}
         {!p.repo && !p.live && p.privateNote && (
@@ -37,15 +37,23 @@ export default function App() {
 
   return (
     <>
-      <Lizard />
       <a className="skip" href="#main">
         Skip to content
       </a>
 
       <div className="content">
-        <header className="hero" id="main">
-          <p className="eyebrow">Portfolio &amp; testing ground</p>
-          <h1>Andrew Pierre</h1>
+        {/* .stage is the gecko's enclosure — it is positioned inside this box,
+            so it can never walk over the body copy below the fold. */}
+        <div className="stage">
+          <Lizard />
+          <header className="hero" id="main">
+          <p className="eyebrow">
+            andrew@wentworth <b>~/portfolio</b> &mdash; testing ground
+          </p>
+          <h1>
+            Andrew Pierre
+            <span className="caret" aria-hidden="true" />
+          </h1>
           <p className="lede">
             CS + Data Science at Wentworth, class of{" "}
             <span className="nowrap">&rsquo;27</span>. I build local-first AI
@@ -71,13 +79,14 @@ export default function App() {
           </nav>
 
           <p className="hint">
-            Click anywhere &mdash; the gecko walks over.{" "}
+            Click anywhere up here &mdash; the gecko walks over.{" "}
             <span aria-hidden="true">&#129422;</span>
           </p>
-        </header>
+          </header>
+        </div>
 
         <section aria-labelledby="work">
-          <h2 id="work">Selected work</h2>
+          <h2 id="work">selected work</h2>
           <div className="grid grid--featured">
             {featured.map((p) => (
               <ProjectCard key={p.name} p={p} />
@@ -90,13 +99,13 @@ export default function App() {
           </div>
           <p className="more">
             <a href={LINKS.github} target="_blank" rel="noreferrer">
-              Everything else on GitHub<span aria-hidden="true"> &#8599;</span>
+              Everything else on GitHub
             </a>
           </p>
         </section>
 
         <section aria-labelledby="experience">
-          <h2 id="experience">Experience</h2>
+          <h2 id="experience">experience</h2>
           <ol className="timeline">
             {ROLES.map((r) => (
               <li key={r.org + r.title}>
@@ -119,7 +128,7 @@ export default function App() {
         </section>
 
         <section aria-labelledby="toolbox">
-          <h2 id="toolbox">Toolbox</h2>
+          <h2 id="toolbox">toolbox</h2>
           <dl className="toolbox">
             <div>
               <dt>Focus</dt>

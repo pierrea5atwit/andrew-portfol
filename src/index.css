@@ -1,13 +1,30 @@
+/* JetBrains Mono, variable weight axis 400-700, latin subset only.
+   Self-hosted: one 31 KB file, no third-party request. SIL OFL, see OFL.txt. */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --bg: #0e1512;
-  --bg2: #131d18;
-  --fg: #e6f0ea;
-  --muted: #90a89b;
-  --accent: #7fd66a;
-  --card: #172420;
-  --card2: #1b2b25;
-  --border: #24352d;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg: #080c0a;
+  --surface: #0d1310;
+  --surface2: #111a15;
+  --border: #1c2b23;
+  --border-hi: #2d493b;
+  --fg: #cfe8d8;
+  --muted: #7d9a89;
+  --dim: #4e6a5b;
+  --accent: #6ee787;
+  --amber: #d9a441;
+
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  font-family: var(--mono);
+  font-size: 15px;
   color-scheme: dark;
 }
 
@@ -18,89 +35,120 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(1200px 800px at 70% -10%, var(--bg2), var(--bg));
-  background-attachment: fixed;
+  background: var(--bg);
   color: var(--fg);
+  font-variant-ligatures: none;
   -webkit-font-smoothing: antialiased;
 }
 
 a {
   color: var(--accent);
+  text-decoration-color: var(--dim);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
 }
 
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 4px;
+  outline-offset: 2px;
 }
 
-/* Keyboard-only escape hatch past the decorative layer. */
 .skip {
   position: absolute;
   left: -9999px;
   top: 0;
   z-index: 20;
   background: var(--accent);
-  color: #0e1512;
+  color: var(--bg);
   padding: 0.6rem 1rem;
-  border-radius: 0 0 8px 0;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
 }
 .skip:focus {
   left: 0;
 }
 
-/* The gecko sits above the page but ignores pointer events so clicks
-   still reach the target listener on window. */
-.lizard {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 5;
-}
-
 .content {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
+  max-width: 880px;
   margin: 0 auto;
-  padding: clamp(1rem, 4vw, 3rem) 1.5rem 4rem;
+  padding: 0 1.5rem 5rem;
 }
 
-/* ---------- hero ---------- */
+/* ---------- hero: the only place the gecko can walk ---------- */
+
+.stage {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  padding: clamp(3rem, 9vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem);
+}
+
+/* Sits inside .stage, so the gecko is bounded by the hero and can never
+   walk across body copy further down the page. */
+.lizard {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
 
 .hero {
-  padding: clamp(2.5rem, 10vw, 6rem) 0 3rem;
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.72rem;
-  color: var(--accent);
-  margin: 0 0 0.75rem;
+  color: var(--dim);
+  font-size: 0.78rem;
+  margin: 0 0 1.25rem;
+}
+
+.eyebrow b {
+  color: var(--muted);
+  font-weight: 400;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
   margin: 0;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+}
+
+/* One tasteful terminal tell. Nothing else on the page blinks. */
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 0.12em;
+  translate: 0 0.12em;
+  background: var(--accent);
+  animation: blink 1.15s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .lede {
-  font-size: 1.15rem;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  max-width: 62ch;
   color: var(--fg);
-  max-width: 54ch;
-  line-height: 1.6;
+  margin: 1.5rem 0 0;
 }
 
 .lede--sub {
-  font-size: 1rem;
   color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .nowrap {
@@ -110,59 +158,73 @@ h1 {
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin: 1.75rem 0 0;
+  gap: 0.5rem;
+  margin: 2rem 0 0;
 }
 
 .links a {
-  border: 1px solid var(--border);
-  background: var(--card);
-  border-radius: 999px;
-  padding: 0.45rem 1.05rem;
-  font-size: 0.9rem;
+  border: 1px solid var(--border-hi);
+  background: var(--surface);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.82rem;
   text-decoration: none;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  color: var(--fg);
+}
+
+.links a::before {
+  content: "./";
+  color: var(--dim);
 }
 
 .links a:hover {
   border-color: var(--accent);
-  background: var(--card2);
+  color: var(--accent);
+  background: var(--surface2);
 }
 
 .hint {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-top: 1.5rem;
+  color: var(--dim);
+  font-size: 0.78rem;
+  margin: 1.75rem 0 0;
 }
 
 /* ---------- sections ---------- */
 
 section {
-  margin-top: clamp(3rem, 8vw, 4.5rem);
+  margin-top: clamp(3rem, 7vw, 4.5rem);
 }
 
 h2 {
-  font-size: 1.35rem;
-  letter-spacing: -0.01em;
-  margin: 0 0 1.25rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  margin: 0 0 1.5rem;
 }
 
-/* ---------- project cards ---------- */
+h2::before {
+  content: "$ ";
+  color: var(--accent);
+}
 
+/* ---------- project panes ---------- */
+
+/* Panes share hairlines via the 1px grid gap, like tiled terminal splits. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
 }
 
 .grid--featured {
   grid-template-columns: 1fr;
-  margin-bottom: 1rem;
+  margin-bottom: 1px;
+  border-bottom: 0;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 760px) {
   .grid--featured {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -171,75 +233,91 @@ h2 {
 .card {
   display: flex;
   flex-direction: column;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.25rem;
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  background: var(--surface);
+  padding: 1.15rem 1.25rem 1.25rem;
+  transition: background 0.12s linear;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  border-color: var(--accent);
+  background: var(--surface2);
 }
 
 .card--featured {
-  background: linear-gradient(160deg, var(--card2), var(--card));
+  background: var(--surface2);
 }
 
-.card h3 {
-  margin: 0.6rem 0 0.4rem;
-  font-size: 1.2rem;
-}
-
-.card > p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
+.card--featured:hover {
+  background: #142019;
 }
 
 .pill {
   align-self: flex-start;
   font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  text-transform: lowercase;
+}
+
+.pill::before {
+  content: "[";
+}
+.pill::after {
+  content: "]";
+}
+
+.card h3 {
+  margin: 0.5rem 0 0.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.card h3::before {
+  content: "> ";
   color: var(--accent);
-  background: rgba(127, 214, 106, 0.1);
-  border: 1px solid rgba(127, 214, 106, 0.25);
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
+}
+
+.card > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.83rem;
+  line-height: 1.7;
 }
 
 .stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.3rem 0.7rem;
   list-style: none;
-  margin: 1rem 0 0;
+  margin: 1.1rem 0 0;
   padding: 0;
+  font-size: 0.7rem;
+  color: var(--dim);
 }
 
-.stack li {
-  font-size: 0.72rem;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.15rem 0.45rem;
+.stack li + li::before {
+  content: "\00b7\00a0";
 }
 
 .card__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.1rem;
   margin-top: auto;
-  padding-top: 1rem;
-  font-size: 0.88rem;
+  padding-top: 1.1rem;
+  font-size: 0.78rem;
 }
 
 .card__links a {
   text-decoration: none;
-  font-weight: 600;
+  color: var(--accent);
+}
+
+.card__links a::before {
+  /* nbsp, not a plain space: a CSS hex escape is terminated by one
+     whitespace character, which is then swallowed. */
+  content: "\2192\00a0";
+  color: var(--dim);
 }
 
 .card__links a:hover {
@@ -247,18 +325,29 @@ h2 {
 }
 
 .card__note {
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-style: italic;
+  color: var(--amber);
+  font-size: 0.72rem;
+}
+
+.card__note::before {
+  content: "// ";
+  opacity: 0.6;
 }
 
 .more {
-  margin-top: 1.25rem;
-  font-size: 0.9rem;
+  margin: 1.25rem 0 0;
+  font-size: 0.8rem;
 }
 
 .more a {
   text-decoration: none;
+}
+
+.more a::before {
+  /* nbsp, not a plain space: a CSS hex escape is terminated by one
+     whitespace character, which is then swallowed. */
+  content: "\2192\00a0";
+  color: var(--dim);
 }
 
 .more a:hover {
@@ -270,116 +359,134 @@ h2 {
 .timeline {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 1.25rem;
-  border-left: 1px solid var(--border);
+  padding: 0;
 }
 
 .timeline > li {
-  position: relative;
-  padding-bottom: 2rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--border);
 }
 
-.timeline > li::before {
-  content: "";
-  position: absolute;
-  left: -1.6rem;
-  top: 0.45rem;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--accent);
+.timeline > li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
 }
 
 .timeline h3 {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 0.88rem;
+  font-weight: 700;
 }
 
 .timeline__meta {
-  margin: 0.2rem 0 0.7rem;
-  color: var(--muted);
-  font-size: 0.82rem;
+  margin: 0;
+  color: var(--dim);
+  font-size: 0.74rem;
+  white-space: nowrap;
 }
 
 .at {
-  color: var(--border);
+  color: var(--dim);
+  font-weight: 400;
 }
 
 .timeline ul {
-  margin: 0;
-  padding-left: 1.1rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
   color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.7;
 }
 
 .timeline ul li {
-  margin-bottom: 0.4rem;
+  padding-left: 1.4rem;
+  text-indent: -1.4rem;
+  margin-bottom: 0.35rem;
+  max-width: 76ch;
+}
+
+.timeline ul li::before {
+  content: "-- ";
+  color: var(--dim);
 }
 
 /* ---------- toolbox ---------- */
 
 .toolbox {
   margin: 0;
-  display: grid;
-  gap: 1rem;
+  border-top: 1px solid var(--border);
 }
 
 .toolbox div {
   display: grid;
-  gap: 0.3rem;
+  gap: 0.25rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 620px) {
   .toolbox div {
-    grid-template-columns: 8.5rem 1fr;
+    grid-template-columns: 9rem 1fr;
     gap: 1rem;
   }
 }
 
 .toolbox dt {
-  color: var(--accent);
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding-top: 0.15rem;
+  color: var(--dim);
+  font-size: 0.74rem;
+}
+
+.toolbox dt::before {
+  content: "--";
+  color: var(--border-hi);
+  margin-right: 0.4rem;
 }
 
 .toolbox dd {
   margin: 0;
   color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.7;
 }
 
 /* ---------- footer ---------- */
 
 footer {
   margin-top: 3.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
+  color: var(--dim);
+  font-size: 0.75rem;
+  line-height: 1.75;
 }
 
 footer p {
-  margin: 0 0 0.6rem;
-  max-width: 60ch;
+  margin: 0 0 0.5rem;
+  max-width: 70ch;
 }
 
-/* Respect the OS setting: no hover lift, and the gecko parks itself
-   (the component also stops its own animation loop). */
+footer p::before {
+  content: "# ";
+  opacity: 0.7;
+}
+
+/* The gecko component also refuses to start under this setting; here we
+   stop the caret blinking and every transition. */
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
+    animation: none !important;
   }
-  .card:hover {
-    transform: none;
+  .caret {
+    opacity: 1;
   }
-  .lizard {
-    display: none;
-  }
+  .lizard,
   .hint {
     display: none;
   }

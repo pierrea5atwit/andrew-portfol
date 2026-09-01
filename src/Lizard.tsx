@@ -34,6 +34,7 @@ const STEP_TRIGGER = 26; // hip-to-foot distance that triggers a step
 const STEP_SPEED = 0.35; // how fast a foot snaps to its new spot
 
 const MAX_SPEED = 3.4;
+const MARGIN = 18; // keep the head this far inside the stage edges
 
 function dist(a: Pt, b: Pt) {
   return Math.hypot(a.x - b.x, a.y - b.y);
@@ -71,19 +72,31 @@ export default function Lizard() {
     // Decorative motion is opt-out at the OS level; honour it and render nothing.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    // The gecko lives inside its parent element (the hero "stage"), not the
+    // whole page. All coordinates below are stage-local.
+    const stage = svgRef.current?.parentElement;
+    if (!stage) return;
+    const size = () => ({
+      w: stage.clientWidth || 640,
+      h: stage.clientHeight || 360,
+    });
+    // Cached so the animation loop never reads layout (clientWidth forces a
+    // reflow); refreshed by the ResizeObserver instead.
+    let box = size();
+
     // Seed the spine trailing off to the left of center.
     const spine: Pt[] = Array.from({ length: SEGMENTS }, () => ({ x: 0, y: 0 }));
     const target: Pt = { x: 0, y: 0 };
     const feet: Pt[] = LEGS.map(() => ({ x: 0, y: 0 }));
     let heading = 0;
 
-    // Park the whole body at the center of the current viewport. Called at
-    // mount and again if we ever find ourselves outside it — a tab that mounts
-    // while hidden or prerendered reports a 0x0 window, which would otherwise
-    // strand the gecko in the top-left corner forever.
+    // Park the whole body at the center of the stage. Called at mount and
+    // again if we ever find ourselves outside it — a tab that mounts while
+    // hidden or prerendered reports a 0x0 box, which would otherwise strand
+    // the gecko in the top-left corner forever.
     const recenter = () => {
-      const w = window.innerWidth || 1024;
-      const h = window.innerHeight || 768;
+      box = size();
+      const { w, h } = box;
       for (let i = 0; i < SEGMENTS; i++) {
         spine[i].x = w / 2 - i * LINK;
         spine[i].y = h / 2;
@@ -99,28 +112,31 @@ export default function Lizard() {
 
     // pointerdown covers mouse, touch, and pen in one listener — a plain
     // "click" handler never fires for the tail end of a touch scroll, which
-    // made the gecko feel dead on mobile.
+    // made the gecko feel dead on mobile. Bound to the stage, so clicks
+    // elsewhere on the page are left alone.
     const onPoint = (e: PointerEvent) => {
-      target.x = e.clientX;
-      target.y = e.clientY;
+      const r = stage.getBoundingClientRect();
+      target.x = e.clientX - r.left;
+      target.y = e.clientY - r.top;
     };
-    window.addEventListener("pointerdown", onPoint);
+    stage.addEventListener("pointerdown", onPoint);
 
-    // If the viewport changes, keep the gecko reachable: pull the target back
+    // If the stage resizes, keep the gecko reachable: pull the target back
     // inside it, and start over entirely if the head is already stranded
     // outside (the 0x0-at-mount case resolves here).
     const onResize = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      box = size();
+      const { w, h } = box;
       const head = spine[0];
       if (head.x < 0 || head.y < 0 || head.x > w || head.y > h) {
         recenter();
         return;
       }
-      target.x = Math.min(target.x, w - 20);
-      target.y = Math.min(target.y, h - 20);
+      target.x = Math.min(target.x, w - MARGIN);
+      target.y = Math.min(target.y, h - MARGIN);
     };
-    window.addEventListener("resize", onResize);
+    const ro = new ResizeObserver(onResize);
+    ro.observe(stage);
 
     let raf = 0;
     const tick = () => {
@@ -132,6 +148,10 @@ export default function Lizard() {
         const speed = Math.min(MAX_SPEED, d * 0.12 + 0.6);
         head.x += Math.cos(heading) * speed;
         head.y += Math.sin(heading) * speed;
+        // The stage clips overflow, so pin the head inside it rather than
+        // letting the body disappear behind an edge.
+        head.x = Math.max(MARGIN, Math.min(box.w - MARGIN, head.x));
+        head.y = Math.max(MARGIN, Math.min(box.h - MARGIN, head.y));
       }
 
       // Distance-constrain the rest of the chain to the node ahead.
@@ -216,8 +236,8 @@ export default function Lizard() {
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("pointerdown", onPoint);
-      window.removeEventListener("resize", onResize);
+      stage.removeEventListener("pointerdown", onPoint);
+      ro.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
