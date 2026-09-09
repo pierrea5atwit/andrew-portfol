@@ -24,7 +24,7 @@ export const PROJECTS: Project[] = [
     tag: "Local-first agent",
     featured: true,
     blurb:
-      "A push-to-talk assistant that runs the whole loop on-device — audio to STT to reasoning to tools to memory to speech — with no cloud inference anywhere in the path. A ReAct planner over a local 8B model drives a typed tool dispatch under a fixed step budget; memory is markdown on disk, synced into SQLite and retrieved with BM25 plus vectors and a cross-encoder rerank. A 'janitor' pass consolidates working memory between sessions, taking a session from ~60k tokens to ~10k. ~680 tests and a 29-case eval gate every change.",
+      "Push-to-talk assistant running the whole loop on-device: audio, STT, a ReAct planner over a local 8B model, tools, memory, speech. No cloud inference anywhere in the path.",
     stack: ["Python", "Ollama", "whisper.cpp", "SQLite / FTS5", "FastAPI"],
     privateNote: "Private while in progress — happy to walk the architecture.",
   },
@@ -33,7 +33,7 @@ export const PROJECTS: Project[] = [
     tag: "Calendar",
     featured: true,
     blurb:
-      "Every .ics feed I'm subscribed to — school, NSBE, personal — merged into one calendar instead of four tabs. Self-provisions its own storage on first run, so a fresh deploy needs no manual database setup.",
+      "Every .ics feed I subscribe to — school, NSBE, personal — merged into one calendar instead of four tabs. Self-provisions its own storage on first run.",
     stack: ["TypeScript", "React", "Vite", "Postgres"],
     repo: "https://github.com/pierrea5atwit/meridian-cal",
     live: "https://meridian-two-eta.vercel.app",
@@ -42,7 +42,7 @@ export const PROJECTS: Project[] = [
     name: "NSBE Region 1 Dashboard",
     tag: "Data / ETL",
     blurb:
-      "Chapter-health dashboard for 103 NSBE chapters and 2,800+ members, built to plan regional initiatives off real demographics rather than vibes. Raw exports run through a filtered-then-clean ETL so member PII never reaches the repo.",
+      "Chapter-health dashboard across 103 chapters and 2,800+ members. Raw exports run a filtered-then-clean ETL, so member PII never reaches the repo.",
     stack: ["TypeScript", "React", "Vite"],
     privateNote: "Private — handles member data.",
   },
@@ -50,7 +50,7 @@ export const PROJECTS: Project[] = [
     name: "NSBE RAG Manager",
     tag: "RAG backend",
     blurb:
-      "A privacy-preserving retrieval backend for meeting intelligence: ingest notes and documents, store semantic memory, answer questions with structured output. Runs entirely local, containerized.",
+      "Privacy-preserving retrieval backend for meeting intelligence: ingest notes, store semantic memory, answer with structured output. Runs entirely local.",
     stack: ["Python", "Flask", "ChromaDB", "Ollama", "Docker"],
     repo: "https://github.com/pierrea5atwit/NSBE_RAG_Manager",
   },
@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
     name: "EquiBirth AI",
     tag: "ML R&D",
     blurb:
-      "Team research on U.S. maternal safety and inequity — an equity-centered policy tool that surfaces where outcomes diverge and what levers exist. I own the technical implementation and pipeline planning: orchestration, interfaces, and visualization.",
+      "Team research on U.S. maternal safety and inequity — an equity-centered policy tool surfacing where outcomes diverge. I own implementation and pipeline planning.",
     stack: ["Python", "pandas", "Ollama", "Streamlit"],
     privateNote: "Team project — in development.",
   },
@@ -66,7 +66,7 @@ export const PROJECTS: Project[] = [
     name: "InterviewAI Coach",
     tag: "Web app",
     blurb:
-      "Record an interview answer in the browser and get it transcribed and scored. Auto-stops after five seconds of silence; transcription runs server-side rather than through a third-party audio API.",
+      "Record an interview answer in the browser, get it transcribed and scored. Auto-stops on silence; transcription runs server-side, not through a third-party API.",
     stack: ["JavaScript", "faster-whisper", "Docker"],
     repo: "https://github.com/pierrea5atwit/Interview_Web_App",
   },
@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
     name: "vGPU Under Load",
     tag: "Systems research",
     blurb:
-      "Cloud-computing research into hidden inefficiency in rented NVIDIA vGPU instances — why instances advertising identical capacity vary by as much as 30% in completion time, and what that costs a small research budget.",
+      "Cloud-computing research into hidden inefficiency in rented NVIDIA vGPU instances — why instances advertising identical capacity vary up to 30% in runtime.",
     stack: ["Python", "Virtualization", "Benchmarking"],
     repo: "https://github.com/pierrea5atwit/CloudResearchProject",
   },
@@ -82,7 +82,7 @@ export const PROJECTS: Project[] = [
     name: "FSH",
     tag: "Systems",
     blurb:
-      "A POSIX shell written in C — process forking and execution via fork() and execvp(), command tokenization, and status monitoring with waitpid().",
+      "A POSIX shell in C — process execution through fork() and execvp(), command tokenization, and status monitoring with waitpid().",
     stack: ["C"],
     repo: "https://github.com/pierrea5atwit/ShellPrgm",
   },
