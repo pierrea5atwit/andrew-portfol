@@ -184,8 +184,13 @@ export default function Globe() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       R = clamp(Math.min(W, H) * 0.48, 140, 430);
       cx = W / 2;
+      measureLayout();
+    };
+
+    /** Where the ground section starts. Cached rather than read per frame:
+     *  getBoundingClientRect forces layout. */
+    const measureLayout = () => {
       const end = document.querySelector("[data-globe-end]");
-      // Cached rather than read per frame: getBoundingClientRect forces layout.
       globeEndY = end
         ? end.getBoundingClientRect().top + window.scrollY
         : H * 2;
@@ -418,6 +423,19 @@ export default function Globe() {
 
     /* ---------- loop ---------- */
 
+    // The layout read above goes stale without any window resize: on a first
+    // visit the web font lands after this effect runs, and on small screens it
+    // reflows the hero past its min-height, moving the ground (68px at
+    // 320x568). Re-read whenever the document's height actually changes.
+    const layoutObserver = new ResizeObserver(() => {
+      measureLayout();
+      if (reduced) {
+        cy = globeY();
+        draw(globeAlpha());
+      }
+    });
+    layoutObserver.observe(document.body);
+
     if (reduced) {
       // Decorative motion is opt-out at the OS level. Render one still frame
       // so the page keeps its backdrop, then stop for good.
@@ -432,6 +450,7 @@ export default function Globe() {
       window.addEventListener("scroll", onResizeStatic, { passive: true });
       window.removeEventListener("pointermove", onPointerMove);
       return () => {
+        layoutObserver.disconnect();
         window.removeEventListener("resize", onResizeStatic);
         window.removeEventListener("scroll", onResizeStatic);
       };
@@ -529,6 +548,7 @@ export default function Globe() {
 
     return () => {
       cancelAnimationFrame(raf);
+      layoutObserver.disconnect();
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", onVisibility);
