@@ -52,7 +52,7 @@ export default function App() {
       <div className="content">
         <header className="hero wrap" id="main">
           <p className="eyebrow">
-            andrew@wentworth <b>~/portfolio</b> &mdash; testing ground
+            pierrea5@wit (edu) <b>~/portfolio</b> &mdash; testing ground
           </p>
           <h1>
             Andrew Pierre
@@ -61,15 +61,13 @@ export default function App() {
           <p className="lede">
             CS + Data Science at Wentworth, class of{" "}
             <span className="nowrap">&rsquo;27</span>. I build local-first AI
-            systems &mdash; agents that run on your own hardware, with your own
+            systems. I'm interested in the agents that run on your own hardware &mdash; on your own
             data.
           </p>
           <p className="lede lede--sub">
-            I care about owning systems: architecture, orchestration, and
-            problem-framing more than any one implementation. Keeping everything
-            on-device is the constraint that makes it interesting &mdash; memory,
-            retrieval, and routing stop being API calls and start being
-            engineering.
+            I care about owning my work. Designing the architecture, implementation, and
+            problem-framing more than any one repetitive task. I want to develop where memory,
+            retrieval, and routing are a step above API calls and require some hands-on engineering.
           </p>
 
           <nav className="links" aria-label="Elsewhere">
@@ -83,7 +81,7 @@ export default function App() {
           </nav>
 
           <p className="hint">
-            Move your cursor &mdash; the gecko chases it around the globe.{" "}
+            Move your cursor! The gecko chases it around the globe!!{" "}
             <span aria-hidden="true">&#129422;</span>
           </p>
         </header>
@@ -149,8 +147,8 @@ export default function App() {
                 <div>
                   <dt>Focus</dt>
                   <dd>
-                    LLM integration &amp; agent design &middot; retrieval systems
-                    &middot; data visualization &amp; analysis &middot; API design
+                    LLM integration &amp; Agent Design &middot; Systems Design
+                    &middot; Data Visualization &amp; Data Processing &middot; Model Evaluation
                   </dd>
                 </div>
                 <div>
@@ -173,7 +171,7 @@ export default function App() {
                   <dd>
                     Operating Systems &middot; Databases &middot; AI Applications
                     &middot; Linear Algebra &middot; Probability &middot;
-                    Statistics &middot; Software Engineering
+                    Statistics &middot; Software Engineering &middot; Differential Equations / Calculus
                   </dd>
                 </div>
               </dl>
@@ -187,7 +185,7 @@ export default function App() {
               <p>
                 Built with React, Vite, and TypeScript. The globe is a
                 hand-rolled wireframe on one canvas, and the gecko walks it in
-                spherical coordinates &mdash; an inverse-kinematics spine whose
+                spherical coordinates &mdash; inverse-kinematics spine whose
                 links are angles along great circles. No 3D library.
               </p>
             </footer>
