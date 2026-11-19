@@ -1,5 +1,6 @@
 import Globe from "./Globe";
-import { PROJECTS, ROLES, LINKS, type Project } from "./data";
+import Resume from "./Resume";
+import { PROJECTS, LINKS, type Project } from "./data";
 
 function ProjectCard({ p, i }: { p: Project; i: number }) {
   return (
@@ -118,64 +119,7 @@ export default function App() {
             offset to know when it should have finished setting. */}
         <div className="ground" data-globe-end>
           <div className="wrap">
-            <section aria-labelledby="experience">
-              <h2 id="experience">experience</h2>
-              <ol className="timeline">
-                {ROLES.map((r) => (
-                  <li key={r.org + r.title}>
-                    <div className="timeline__head">
-                      <h3>
-                        {r.title} <span className="at">&middot;</span> {r.org}
-                      </h3>
-                      <p className="timeline__meta">
-                        {r.when} <span className="at">&middot;</span> {r.where}
-                      </p>
-                    </div>
-                    <ul>
-                      {r.points.map((pt) => (
-                        <li key={pt}>{pt}</li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ol>
-            </section>
-
-            <section aria-labelledby="toolbox">
-              <h2 id="toolbox">toolbox</h2>
-              <dl className="toolbox">
-                <div>
-                  <dt>Focus</dt>
-                  <dd>
-                    LLM integration &amp; Agent Design &middot; Systems Design
-                    &middot; Data Visualization &amp; Data Processing &middot; Model Evaluation
-                  </dd>
-                </div>
-                <div>
-                  <dt>Languages</dt>
-                  <dd>
-                    Python &middot; TypeScript / JavaScript &middot; C / C++
-                    &middot; Java &middot; Rust &middot; SQL
-                  </dd>
-                </div>
-                <div>
-                  <dt>Tools</dt>
-                  <dd>
-                    Git &middot; Docker &middot; Ollama &middot; SQLite &middot;
-                    MongoDB &middot; Vercel &middot; Netlify &middot; Claude Code
-                    &middot; VS Code
-                  </dd>
-                </div>
-                <div>
-                  <dt>Coursework</dt>
-                  <dd>
-                    Operating Systems &middot; Databases &middot; AI Applications
-                    &middot; Linear Algebra &middot; Probability &middot;
-                    Statistics &middot; Software Engineering &middot; Differential Equations / Calculus
-                  </dd>
-                </div>
-              </dl>
-            </section>
+            <Resume />
 
             <footer>
               <p>

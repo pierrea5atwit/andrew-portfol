@@ -423,107 +423,175 @@ h2::before {
   margin-top: clamp(2.5rem, 6vw, 3.5rem);
 }
 
-/* ---------- experience ---------- */
+/* ---------- resume: filters ---------- */
 
-.timeline {
+.resume__head {
+  margin-bottom: 1.1rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.75rem;
+}
+
+.filter {
+  font: inherit;
+  font-size: 0.76rem;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.32rem 0.7rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  transition: color 0.12s linear, border-color 0.12s linear;
+}
+
+.filter::before {
+  content: "--";
+  color: var(--border-hi);
+}
+
+.filter:hover {
+  color: var(--fg);
+  border-color: var(--border-hi);
+}
+
+/* aria-pressed is the state, so style from it rather than a parallel class. */
+.filter[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+.filter[aria-pressed="true"]::before {
+  content: "==";
+  color: var(--bg);
+  opacity: 0.55;
+}
+
+.filter__count {
+  font-size: 0.66rem;
+  opacity: 0.6;
+}
+
+/* ---------- resume: entries ---------- */
+
+.entries {
   list-style: none;
-  margin: 1.5rem 0 0;
+  margin: 0;
   padding: 0;
 }
 
-.timeline > li {
-  padding: 1.1rem 0;
+.entry {
+  position: relative;
+  padding: 1.15rem 0;
   border-top: 1px solid var(--border);
 }
 
-.timeline > li:last-child {
+.entry:last-child {
   border-bottom: 1px solid var(--border);
 }
 
-.timeline__head {
+.entry__head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.4rem 1.5rem;
+  gap: 0.3rem 1.5rem;
 }
 
-.timeline h3 {
+.entry h3 {
   margin: 0;
   font-size: 0.88rem;
   font-weight: 700;
+  max-width: 62ch;
 }
 
-.timeline__meta {
+.entry__org {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.entry__meta {
   margin: 0;
   color: var(--dim);
-  font-size: 0.74rem;
+  font-size: 0.73rem;
   white-space: nowrap;
+}
+
+.entry__kind {
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.entry__points {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.entry__points li {
+  padding-left: 1.4rem;
+  text-indent: -1.4rem;
+  margin-bottom: 0.35rem;
+  max-width: 78ch;
+}
+
+.entry__points li::before {
+  content: "-- ";
+  color: var(--dim);
+}
+
+.entry__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+}
+
+.entry__tags li {
+  font-size: 0.7rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.12rem 0.5rem;
+}
+
+.entry__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1.1rem;
+  margin-top: 0.85rem;
+  font-size: 0.76rem;
+}
+
+.entry__links a {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.entry__links a::before {
+  content: "92 a0";
+  color: var(--dim);
+}
+
+.entry__links a:hover {
+  text-decoration: underline;
 }
 
 .at {
   color: var(--dim);
   font-weight: 400;
-}
-
-.timeline ul {
-  margin: 0.8rem 0 0;
-  padding: 0;
-  list-style: none;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.7;
-}
-
-.timeline ul li {
-  padding-left: 1.4rem;
-  text-indent: -1.4rem;
-  margin-bottom: 0.35rem;
-  max-width: 76ch;
-}
-
-.timeline ul li::before {
-  content: "-- ";
-  color: var(--dim);
-}
-
-/* ---------- toolbox ---------- */
-
-.toolbox {
-  margin: 1.5rem 0 0;
-  border-top: 1px solid var(--border);
-}
-
-.toolbox div {
-  display: grid;
-  gap: 0.25rem;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-@media (min-width: 620px) {
-  .toolbox div {
-    grid-template-columns: 9rem 1fr;
-    gap: 1rem;
-  }
-}
-
-.toolbox dt {
-  color: var(--dim);
-  font-size: 0.74rem;
-}
-
-.toolbox dt::before {
-  content: "--";
-  color: var(--border-hi);
-  margin-right: 0.4rem;
-}
-
-.toolbox dd {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.7;
 }
 
 /* ---------- footer ---------- */
