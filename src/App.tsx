@@ -53,7 +53,7 @@ export default function App() {
       <div className="content">
         <header className="hero wrap" id="main">
           <p className="eyebrow">
-            pierrea5@wit (edu) <b>~/portfolio</b> &mdash; testing ground
+            pierrea5@wit (edu) <b>~/portfolio</b> &middot; testing ground
           </p>
           <h1>
             Andrew Pierre
@@ -61,14 +61,16 @@ export default function App() {
           </h1>
           <p className="lede">
             CS + Data Science at Wentworth, class of{" "}
-            <span className="nowrap">&rsquo;27</span>. I build local-first AI
-            systems. I'm interested in the agents that run on your own hardware &mdash; on your own
-            data.
+            <span className="nowrap">&rsquo;27</span>, building local-first AI
+            systems that run on your own hardware with your own data.
           </p>
           <p className="lede lede--sub">
-            I care about owning my work. Designing the architecture, implementation, and
-            problem-framing more than any one repetitive task. I want to develop where memory,
-            retrieval, and routing are a step above API calls and require some hands-on engineering.
+            Hello! My name is Andrew. I like owning the whole life cycle of my
+            work, and design is the part I enjoy most: how a system is shaped,
+            how it is built, and who it is for. I am learning agentic AI and ML
+            systems, building persistent memory and inference engines I can rely
+            on, and I want to understand the systems and API calls underneath
+            rather than stopping at the library that wraps them.
           </p>
 
           <nav className="links" aria-label="Elsewhere">
@@ -123,14 +125,14 @@ export default function App() {
 
             <footer>
               <p>
-                B.S. Computer Science, minor in Data Science &amp; Applied Math
-                &mdash; expected Dec. 2027.
+                B.S. Computer Science, minor in Data Science and Applied Math,
+                expected Dec. 2027.
               </p>
               <p>
-                Built with React, Vite, and TypeScript. The globe is a
-                hand-rolled wireframe on one canvas, and the gecko walks it in
-                spherical coordinates &mdash; inverse-kinematics spine whose
-                links are angles along great circles. No 3D library.
+                Built with React, Vite and TypeScript. The globe is a
+                hand-rolled wireframe on one canvas and the gecko walks it in
+                spherical coordinates, an inverse-kinematics spine whose links
+                are angles along great circles, with no 3D library involved.
               </p>
             </footer>
           </div>

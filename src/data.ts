@@ -1,12 +1,12 @@
 /**
  * Single source of truth for site content.
  *
- * Keep this file honest — everything here is public-facing. If a link is
+ * Keep this file honest, because everything here is public-facing. If a link is
  * `undefined` the card renders as private instead of dead-linking.
  *
  * Two layers, on purpose:
- *   PROJECTS — the curated rail. What I want someone to look at first.
- *   RESUME   — the complete record, filterable. Everything, including the
+ *   PROJECTS: the curated rail. What I want someone to look at first.
+ *   RESUME:   the complete record, filterable. Everything, including the
  *              work that is private, employer-owned, or finished.
  */
 
@@ -29,16 +29,16 @@ export const PROJECTS: Project[] = [
     tag: "Local-first agent",
     featured: true,
     blurb:
-      "Local-first voice agent — audio, on-device STT, a planning loop over a local 8B model, tools, memory, speech, with no cloud inference in the request path. Layered kernel: perception, cognitive core, and four independent memory lanes behind a syscall-style boundary, governed per turn.",
+      "A local-first voice agent that keeps the entire loop on device, from audio capture and speech-to-text through a planning loop over a local 8B model, tool dispatch, memory and speech. The architecture layers perception, a cognitive core, and four independent memory lanes behind a syscall-style boundary, with a governor supervising every turn.",
     stack: ["Python", "Ollama", "whisper.cpp", "SQLite / FTS5", "FastAPI"],
-    privateNote: "Private while in progress — happy to walk the architecture.",
+    privateNote: "Private while in progress, though I am happy to walk through the architecture.",
   },
   {
     name: "EquiBirth AI",
     tag: "ML research",
     featured: true,
     blurb:
-      "Who bears the preterm-birth disparity, and can it be predicted from U.S. birth records? ~25M CDC natality rows. The honest number is AUC-ROC 0.66 — the 0.91 baseline was data leakage. A fairness audit found ~2.7x over-flagging of Black mothers.",
+      "A study of who bears the preterm-birth disparity in the United States, and whether it can be predicted from birth records, across roughly 25M CDC natality rows. The honest result is an AUC-ROC of 0.66, because the 0.91 baseline turned out to be data leakage, and a fairness audit found about 2.7x over-flagging of Black mothers.",
     stack: ["Python", "scikit-learn", "Streamlit", "Colab"],
     repo: "https://github.com/ParshvCrafts/EquiBirth_AI",
   },
@@ -46,7 +46,7 @@ export const PROJECTS: Project[] = [
     name: "Pokémon AI Agent",
     tag: "Hybrid AI",
     blurb:
-      "Deterministic models handle the numeric side of a battle — damage, weather, win probability — and a mixture-of-experts layer picks the move. Lazy PokeAPI caching; 22% better predicted win accuracy over 1,000 simulations.",
+      "Deterministic models handle the numeric side of a battle, including damage, weather and win probability, while a mixture-of-experts layer picks the move. PokeAPI data is cached on first encounter, and across 1,000 simulations the system predicted wins 22% more accurately.",
     stack: ["Python", "scikit-learn", "pandas", "PokeAPI"],
     repo: "https://github.com/pierrea5atwit/nuzlockeSystem2",
   },
@@ -54,7 +54,7 @@ export const PROJECTS: Project[] = [
     name: "InterviewAI Coach",
     tag: "Web app",
     blurb:
-      "Record an interview answer in the browser, get it transcribed and scored. Auto-stops on silence; transcription runs server-side, not through a third-party API.",
+      "Record an interview answer in the browser and get it transcribed and scored, with recording that stops itself after five seconds of silence. Transcription runs server-side rather than through a third-party API.",
     stack: ["JavaScript", "faster-whisper", "Docker"],
     repo: "https://github.com/pierrea5atwit/Interview_Web_App",
   },
@@ -62,7 +62,7 @@ export const PROJECTS: Project[] = [
     name: "vGPU Under Load",
     tag: "Systems research",
     blurb:
-      "Why do rented NVIDIA vGPU instances advertising identical capacity vary up to 30% in runtime? Simulated ML training over a vGPU connection, measured with NVML and CuPy.",
+      "An investigation into why rented NVIDIA vGPU instances that advertise identical capacity can vary by as much as 30% in runtime, simulating machine-learning training over a vGPU connection and measuring it with NVML and CuPy.",
     stack: ["Python", "CuPy", "NVML", "pytest"],
     repo: "https://github.com/pierrea5atwit/CloudResearchProject",
   },
@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
     name: "Water Quality Classifier",
     tag: "ML",
     blurb:
-      "Random-forest model scoring water quality, with a confidence score and recommendations targeting the most pressing problem areas.",
+      "A random-forest model that scores water quality and returns a confidence score alongside recommendations aimed at the most pressing problem areas.",
     stack: ["Python", "scikit-learn"],
     repo: "https://github.com/pierrea5atwit/waterQuality",
   },
@@ -78,7 +78,7 @@ export const PROJECTS: Project[] = [
     name: "FSH",
     tag: "Systems",
     blurb:
-      "A POSIX shell in C — process execution through fork() and execvp(), command tokenization, and status monitoring with waitpid().",
+      "A POSIX shell written in C, handling process execution through fork() and execvp(), command tokenization, and status monitoring with waitpid().",
     stack: ["C"],
     repo: "https://github.com/pierrea5atwit/ShellPrgm",
   },
@@ -121,7 +121,7 @@ export const RESUME: ResumeEntry[] = [
     kind: "experience",
     title: "Data Analytics & Engineering Intern",
     org: "Dynatrace",
-    when: "Jun — Aug 2026",
+    when: "Jun – Aug 2026",
     where: "Boston, MA",
     points: [
       "Automated data quality checks and testing for analytics output with custom code against Snowflake (~10s per query), cutting error-detection time from 72 hours to 8.",
@@ -134,7 +134,7 @@ export const RESUME: ResumeEntry[] = [
     kind: "experience",
     title: "Software Engineering Intern",
     org: "Liberty Mutual",
-    when: "Jun — Aug 2025",
+    when: "Jun – Aug 2025",
     where: "Portsmouth, NH",
     points: [
       "Technical lead on two full-stack internal tools (Python, TypeScript, SQL) that replaced manual lookup of IT engagement data for cross-functional managers.",
@@ -147,7 +147,7 @@ export const RESUME: ResumeEntry[] = [
     kind: "experience",
     title: "Young Adult Leader, Youth Advisory Board",
     org: "Health Resources in Action · MA Dept. of Public Health",
-    when: "Apr 2025 — present",
+    when: "Apr 2025 – present",
     where: "Massachusetts",
     points: [
       "Coordinate meetings with Comprehensive School Health Services staff on outreach and data-collection methods for schools under varying grant statuses statewide.",
@@ -157,9 +157,9 @@ export const RESUME: ResumeEntry[] = [
   },
   {
     kind: "experience",
-    title: "Camp Coach — Python, LEGO SPIKE, Scratch, Minecraft",
+    title: "Camp Coach: Python, LEGO SPIKE, Scratch, Minecraft",
     org: "CodeWiz Needham",
-    when: "Apr — Aug 2024 · Apr — Jun 2025",
+    when: "Apr – Aug 2024 · Apr – Jun 2025",
     where: "Needham, MA",
     points: [
       "Taught parallel one-hour classes for children aged 6–12 across Python, LEGO SPIKE engineering, and Minecraft modding, in sections of 2–5 students.",
@@ -170,12 +170,12 @@ export const RESUME: ResumeEntry[] = [
   /* ---- projects ---- */
   {
     kind: "projects",
-    title: "Apollo — Local-First Voice Agent",
+    title: "Apollo: Local-First Voice Agent",
     when: "2026",
     tags: ["Python", "Ollama (Llama 3.1 8B)", "SQLite / FTS5", "FastAPI", "whisper.cpp"],
     note: "Private while in progress.",
     points: [
-      "Designed a fully on-device voice agent — audio capture, local speech-to-text, a planning loop over a local 8B model, tool dispatch and memory — with no cloud inference in the request path.",
+      "Designed a fully on-device voice agent covering audio capture, local speech-to-text, a planning loop over a local 8B model, tool dispatch and memory, with no cloud inference in the request path.",
       "Refactored into a layered architecture (perception, cognitive core, memory) with a syscall-style boundary between layers, and split memory into four independent lanes.",
       "Added a per-turn governor and replay evaluation over a suite that now runs 845 tests.",
       "Migrated memory from flat Markdown to SQLite/FTS5 with BM25 retrieval, and shipped a consolidation 'janitor' cutting token usage ~83% (~60K → ~10K per session).",
@@ -183,9 +183,9 @@ export const RESUME: ResumeEntry[] = [
   },
   {
     kind: "projects",
-    title: "EquiBirth AI — Preterm Birth Disparity Analysis",
+    title: "EquiBirth AI: Preterm Birth Disparity Analysis",
     org: "AI4ALL Research Cohort",
-    when: "May — Oct 2026",
+    when: "May – Oct 2026",
     tags: ["Python", "scikit-learn", "Streamlit", "Colab"],
     repo: "https://github.com/ParshvCrafts/EquiBirth_AI",
     points: [
@@ -201,7 +201,7 @@ export const RESUME: ResumeEntry[] = [
     org: "Region 1 Membership Chair",
     when: "2026",
     tags: ["TypeScript", "React", "Python", "Flask", "ChromaDB", "Ollama", "Docker"],
-    note: "Private — handles member data.",
+    note: "Private, since it handles member data.",
     points: [
       "Built a privacy-first operations dashboard covering 103 chapters and 2,800+ members.",
       "Developed a raw → filtered → clean ETL pipeline guaranteeing that only cleaned, protected data reaches the client; member PII never reaches the repo.",
@@ -211,7 +211,7 @@ export const RESUME: ResumeEntry[] = [
   {
     kind: "projects",
     title: "Pokémon AI Agent",
-    when: "Jul 2025 — Apr 2026",
+    when: "Jul 2025 – Apr 2026",
     tags: ["Python", "scikit-learn", "pandas", "PokeAPI"],
     repo: "https://github.com/pierrea5atwit/nuzlockeSystem2",
     points: [
@@ -225,7 +225,7 @@ export const RESUME: ResumeEntry[] = [
     kind: "projects",
     title: "NVIDIA vGPU Virtualization Research",
     org: "Cloud Computing, Wentworth",
-    when: "Feb — Apr 2026",
+    when: "Feb – Apr 2026",
     tags: ["Python", "CuPy", "NVML", "pytest"],
     repo: "https://github.com/pierrea5atwit/CloudResearchProject",
     points: [
@@ -259,7 +259,7 @@ export const RESUME: ResumeEntry[] = [
   },
   {
     kind: "projects",
-    title: "FSH — POSIX Shell",
+    title: "FSH: A POSIX Shell",
     org: "Operating Systems, Wentworth",
     when: "2026",
     tags: ["C"],
@@ -276,8 +276,8 @@ export const RESUME: ResumeEntry[] = [
     repo: "https://github.com/pierrea5atwit/andrew-portfol",
     live: "https://andrew-portfol.vercel.app",
     points: [
-      "Hand-rolled wireframe globe on one canvas — no 3D library — with a gecko that walks its surface in spherical coordinates, chasing the cursor along great circles.",
-      "Doubles as a sandbox for TSX experiments.",
+      "A hand-rolled wireframe globe drawn on a single canvas without a 3D library, with a gecko that walks its surface in spherical coordinates, chasing the cursor along great circles.",
+      "The site doubles as a sandbox for TSX experiments.",
     ],
   },
   {
@@ -298,7 +298,7 @@ export const RESUME: ResumeEntry[] = [
     when: "2025",
     tags: ["JavaScript"],
     repo: "https://github.com/pierrea5atwit/StudyToolRepo",
-    points: ["Hackathon build with a four-person team."],
+    points: ["A hackathon build put together with a four-person team."],
   },
 
   /* ---- leadership ---- */
@@ -306,7 +306,7 @@ export const RESUME: ResumeEntry[] = [
     kind: "leadership",
     title: "Region 1 Membership Chair",
     org: "National Society of Black Engineers",
-    when: "Apr 2026 — present",
+    when: "Apr 2026 – present",
     where: "New England",
     points: [
       "Own membership data for 103 chapters and 2,800+ members across the Region 1 Membership Zone.",
@@ -317,7 +317,7 @@ export const RESUME: ResumeEntry[] = [
     kind: "leadership",
     title: "Vice President",
     org: "National Society of Black Engineers, Wentworth",
-    when: "Apr 2025 — 2026",
+    when: "Apr 2025 – 2026",
     where: "Boston, MA",
     points: [
       "Led a 110+ member chapter and an 11-person student executive board, overseeing membership engagement and chapter affairs.",
@@ -328,7 +328,7 @@ export const RESUME: ResumeEntry[] = [
     kind: "leadership",
     title: "Career Peer Mentor",
     org: "Wentworth Co-ops & Careers",
-    when: "Aug 2025 — present",
+    when: "Aug 2025 – present",
     where: "Boston, MA",
     points: [
       "Host tutoring sessions and workshops building students' job-search skills and comfort in professional environments.",
@@ -365,7 +365,7 @@ export const RESUME: ResumeEntry[] = [
   {
     kind: "education",
     title: "AI4ALL Research Cohort",
-    when: "May — Oct 2026",
+    when: "May – Oct 2026",
     points: [
       "Selected research cohort; produced the EquiBirth AI preterm-birth disparity study with a team of 7.",
     ],
